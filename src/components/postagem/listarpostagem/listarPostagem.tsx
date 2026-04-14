@@ -1,0 +1,56 @@
+import React, { useContext, useEffect, useState } from 'react'
+import { AuthContext } from '../../../contexts/AuthContext'
+import { buscar } from '../../../Service/service'
+
+import type Postagem from '../../../models/postagem'
+import Cardpostagem from '../cardPostagem/cardpostagem'
+import { ToastAlerta } from '../../../util/ToastAlert'
+
+export default function ListarPostagem() {
+
+    const[Postagem,setPostagens] = useState<Postagem[]>([])
+    const { usuario,handleLogout} = useContext(AuthContext)
+
+
+const token = usuario.token
+
+async function listagemdePostagem(){
+    
+try{
+     
+await buscar("/postagens",setPostagens,{
+headers:{
+    Authorization:token
+}
+
+})
+
+}catch(error:any){
+    if(error.toString().includes("401")){
+    handleLogout()
+    ToastAlerta('voce deve estar logado','erro')
+    }
+}
+}
+
+
+useEffect(()=>{
+
+listagemdePostagem()
+
+},[Postagem.length])
+
+
+
+
+
+
+
+  return (
+    <div>
+<h1>ola</h1>
+ <div>{Postagem.map((x)=>(<Cardpostagem key={x.id} postagem={x}/>))}</div>
+      
+    </div>
+  )
+}

@@ -29,7 +29,7 @@ setDados(respostabusca.data)                                     //READ
 }
 
     
-export const cadastrar = async (url: string, dados: object, setDados: Function, header: object) => {   // temas
+export const cadastrar = async (url: string, dados: object, setDados: Function, header: object) => { 
     const resposta = await api.post(url, dados, header)
     setDados(resposta.data)
 }

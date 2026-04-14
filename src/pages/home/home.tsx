@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Home() {
   return (
     <>
@@ -14,7 +16,7 @@ function Home() {
             {/* Botão (agora está DENTRO do lado esquerdo, junto com os textos) */}
             <div style={{ display: "flex", justifyContent: "space-around", gap: "1rem" }}>
               <div style={{ borderRadius: "0.5rem", color: "white", border: "2px solid white", padding: "0.5rem 1rem" }}>
-                Nova Postagem
+               <Link to='/cadastrarpostagem' > Nova Postagem</Link> 
               </div>
             </div>
           </div>

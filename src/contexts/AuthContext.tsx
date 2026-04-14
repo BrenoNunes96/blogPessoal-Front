@@ -1,6 +1,7 @@
-import { createContext, useState, type ReactNode } from "react";
+import { createContext, useRef, useState, type ReactNode } from "react";
 import type UsuarioLogin from "../models/usuarioLogin";
 import { login } from "../Service/service";
+import { ToastAlerta } from "../util/ToastAlert";
 
 
 interface AuthContextProps{
@@ -8,6 +9,7 @@ interface AuthContextProps{
   handleLogout(): void
   handleLogin(usuario: UsuarioLogin): Promise<void>
   isLoading: boolean
+    isLogout: boolean
 }
 
 interface AuthProviderProps{
@@ -22,6 +24,7 @@ export function AuthProvider({ children }: AuthProviderProps){
   // Inicializar o estado usuario (armazenar os dados do usuário autenticado)
   const [usuario, setUsuario] = useState<UsuarioLogin>({
     id: 0,
+    nome:"",
     usuario: "",
     senha: "",
     foto: "",
@@ -37,8 +40,9 @@ export function AuthProvider({ children }: AuthProviderProps){
     setIsLoading(true);
 
     try{
-        await login('/usuarios/logar', usuarioLogin, setUsuario);
-        alert('Usuário autenticado com sucesso!');
+        await login('/usuarios/logar', usuarioLogin, setUsuario);    //devolve em SETUSUARIO envia usuariologin q veio de login a const 
+        ToastAlerta('Usuário autenticado com sucesso!','sucesso');
+           isLogout.current=false
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     }catch(error){
         alert('Os dados do Usuário estão inconsistentes!');
@@ -47,10 +51,15 @@ export function AuthProvider({ children }: AuthProviderProps){
     setIsLoading(false);
   }
 
+  const isLogout=useRef(false)
+
   // Implementação da função de Logout
   function handleLogout(){
+   // Define isLogout como true para sinalizar que o usuário fez o logout
+    isLogout.current=true
     setUsuario({
       id: 0,
+          nome:"",
       usuario: "",
       senha: "",
       foto: "",
@@ -59,7 +68,8 @@ export function AuthProvider({ children }: AuthProviderProps){
   }
 
   return(
-    <AuthContext.Provider value={{ usuario, handleLogin, handleLogout, isLoading }}>
+    // eslint-disable-next-line react-hooks/refs
+    <AuthContext.Provider value={{ usuario, handleLogin, handleLogout, isLoading, isLogout: isLogout.current}}>
       {children}
     </AuthContext.Provider>
   )

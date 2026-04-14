@@ -4,74 +4,75 @@ import { AuthContext } from "../../../contexts/AuthContext"
 import type Tema from "../../../models/tema"
 import { buscar, deletar } from "../../../Service/service"
 import { ClipLoader } from "react-spinners"
+import { ToastAlerta } from "../../../util/ToastAlert"
+ // Ajuste o caminho se necessário
 
 function DeletarTema() {
     const navigate = useNavigate()
 
-const [tema, setTema] = useState<Tema>({} as Tema)
-const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [tema, setTema] = useState<Tema>({} as Tema)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
-const { usuario, handleLogout } = useContext(AuthContext)
-const token = usuario.token
+    const { usuario, handleLogout } = useContext(AuthContext)
+    const token = usuario.token
 
-const { id } = useParams<{ id: string }>()
+    const { id } = useParams<{ id: string }>()
 
-async function buscarPorId(id: string) {
-    try {
-        await buscar(`/temas/${id}`, setTema, {
-            headers: {
-                'Authorization': token
+    async function buscarPorId(id: string) {
+        try {
+            await buscar(`/temas/${id}`, setTema, {
+                headers: {
+                    'Authorization': token
+                }
+            })
+        } catch (error: any) {
+            if (error.toString().includes('401')) {
+                handleLogout()
             }
-        })
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-        if (error.toString().includes('401')) {
-            handleLogout()
-        }
-    }
-}
-
-useEffect(() => {
-    if (token === '') {
-        alert('Você precisa estar logado')
-        navigate('/')
-    }
-}, [token])
-
-useEffect(() => {
-    if (id !== undefined) {
-        buscarPorId(id)
-    }
-}, [id])
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function deletarTema() {
-    setIsLoading(true)
-
-    try {
-        await deletar(`/temas/${id}`, {
-            headers: {
-                'Authorization': token
-            }
-        })
-
-        alert('Tema apagado com sucesso')
-
-    } catch (error: any) {
-        if (error.toString().includes('401')) {
-            handleLogout()
-        } else {
-            alert('Erro ao deletar o tema.')
         }
     }
 
-    setIsLoading(false)
-    retornar()
-}
+    useEffect(() => {
+        if (token === '') {
+            ToastAlerta('Você precisa estar logado', 'info')
+            navigate('/')
+        }
+    }, [token])
 
-function retornar() {
-    navigate("/temas")
-}
+    useEffect(() => {
+        if (id !== undefined) {
+            buscarPorId(id)
+        }
+    }, [id])
+
+    async function deletarTema() {
+        setIsLoading(true)
+
+        try {
+            await deletar(`/temas/${id}`, {
+                headers: {
+                    'Authorization': token
+                }
+            })
+
+            ToastAlerta('Tema apagado com sucesso', 'sucesso')
+
+        } catch (error: any) {
+            if (error.toString().includes('401')) {
+                handleLogout()
+            } else {
+                ToastAlerta('Erro ao deletar o tema.', 'erro')
+            }
+        }
+
+        setIsLoading(false)
+        retornar()
+    }
+
+    function retornar() {
+        navigate("/temas")
+    }
+
     return (
         <div className='container w-1/3 mx-auto'>
             <h1 className='text-4xl text-center my-4'>Deletar tema</h1>
@@ -82,7 +83,7 @@ function retornar() {
                     className='py-2 px-6 bg-indigo-600 text-white font-bold text-2xl'>
                     Tema
                 </header>
-          <p className='p-8 text-3xl bg-slate-200 h-full'>{tema.descricao}</p>
+                <p className='p-8 text-3xl bg-slate-200 h-full'>{tema.descricao}</p>
                 <div className="flex">
                     <button
                         className='text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2' onClick={retornar}>
@@ -90,13 +91,15 @@ function retornar() {
                     </button>
 
                     <button
-                       onClick={deletarTema} className='w-full text-slate-100 bg-indigo-400
-                                   hover:bg-indigo-600 flex items-center justify-center'>
-                     {isLoading?<ClipLoader color="#ffffff" size={24}/>: <span>sim</span>  }
+                        onClick={deletarTema} 
+                        className='w-full text-slate-100 bg-indigo-400 hover:bg-indigo-600 flex items-center justify-center'
+                    >
+                        {isLoading ? <ClipLoader color="#ffffff" size={24} /> : <span>Sim</span>}
                     </button>
                 </div>
             </div>
         </div>
     )
 }
+
 export default DeletarTema

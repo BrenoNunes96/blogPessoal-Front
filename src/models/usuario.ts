@@ -1,11 +1,11 @@
-import type Postagem  from './postagem'
+    import type Postagem  from './postagem'
 
-export default interface  Usuario{
-id:number,
-nome:string,
-usuario:string,
-senha:string,
-foto:string,
-postagem?:Postagem[] | null
+    export default interface  Usuario{
+    id:number,
+    nome:string,
+    usuario:string,
+    senha:string,
+    foto:string,
+    postagem?:Postagem[] | null
 
-}
+    }
