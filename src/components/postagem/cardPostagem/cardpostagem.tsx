@@ -1,4 +1,4 @@
-import React from 'react'
+
 import type Postagem from '../../../models/postagem'
 import { Link } from 'react-router-dom'
 

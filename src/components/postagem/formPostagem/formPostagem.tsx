@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState, type ChangeEvent, type SyntheticEvent } from 'react'
+import  { useContext, useEffect, useState, type ChangeEvent, type SyntheticEvent } from 'react'
 import type Postagem from '../../../models/postagem'
-import type UsuarioLogin from '../../../models/usuarioLogin'
+
 import { AuthContext } from '../../../contexts/AuthContext'
 import { atualizar, buscar, cadastrar } from '../../../Service/service'
-import { data, useNavigate, useParams } from 'react-router-dom'
+import {useNavigate, useParams } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
 import { ToastAlerta } from '../../../util/ToastAlert'
 import type Tema from '../../../models/tema'
@@ -29,6 +29,7 @@ await buscar(`/postagens/${id}`,setPostagem,{       // buscar postagem de acordo
     }
 }
 )
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }catch(error:any){     
         if(error.toString().includes("401")){
           ToastAlerta('voce deve estar logado',"erro")
@@ -42,6 +43,7 @@ await buscar(`/postagens/${id}`,setPostagem,{       // buscar postagem de acordo
 			await buscar(`/temas/${id}`, setTema, {
 				headers: { Authorization: token },
 			})
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (error: any) {
 			if (error.toString().includes('401')) {
 				handleLogout()
@@ -55,6 +57,7 @@ await buscar(`/postagens/${id}`,setPostagem,{       // buscar postagem de acordo
 			await buscar('/temas', setTemas, {
 				headers: { Authorization: token },
 			})
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (error: any) {
 			if (error.toString().includes('401')) {
 				handleLogout()
@@ -66,6 +69,7 @@ useEffect(() => {
 			ToastAlerta('Você precisa estar logado', "info")
 			navigate('/')
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [token])
 
 useEffect(()=>{
@@ -73,6 +77,7 @@ useEffect(()=>{
 if(id !== undefined){     
  buscaridPostagem(id)// se id nao for indefinido quer dizer que tem id entao ela existe logo atualizara o que ja tem no post
 }
+// eslint-disable-next-line react-hooks/exhaustive-deps
 },[id])
 
 	useEffect(() => {
@@ -80,6 +85,7 @@ if(id !== undefined){
 			...postagem,
 			tema: tema,
 		})
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [tema])
 
 async function gerarnovapostagem(e:SyntheticEvent<HTMLFormElement>){
@@ -97,6 +103,7 @@ headers:{
 
  ToastAlerta("cadatrado com sucesso","sucesso")
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 }catch(error:any){
      if(error.toString().includes("401")){                   // se o error tiver a string 401 é nao autorizado sem token
             alert('voce deve estar logado')
@@ -115,6 +122,7 @@ await atualizar("/postagens/atualizar",postagem,setPostagem,{
 
 })
  ToastAlerta("atualizado com sucesso","sucesso")
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }catch(error:any){
         if(error.toString().includes('401')){
             ToastAlerta('voce deve estar logado','erro')
@@ -138,7 +146,7 @@ setPostagem({
 
 }
 
-const datas = { ...postagem,data:new Date()}    // puxa data do dia
+  // puxa data do dia
 
 
 	const carregandoTema = tema.descricao === ''
@@ -172,6 +180,7 @@ const datas = { ...postagem,data:new Date()}    // puxa data do dia
                 name='texto'
                 value={postagem.texto}
                 rows={4}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 onChange={(e: any) => atualizarEstado(e)}
                 className="border-2 border-slate-300 rounded-lg p-3 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all bg-white resize-none"
             />

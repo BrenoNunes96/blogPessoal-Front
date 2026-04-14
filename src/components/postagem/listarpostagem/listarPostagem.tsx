@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import  { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../../contexts/AuthContext'
 import { buscar } from '../../../Service/service'
 
@@ -25,6 +25,7 @@ headers:{
 
 })
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 }catch(error:any){
     if(error.toString().includes("401")){
     handleLogout()
@@ -38,6 +39,7 @@ useEffect(()=>{
 
 listagemdePostagem()
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
 },[Postagem.length])
 
 

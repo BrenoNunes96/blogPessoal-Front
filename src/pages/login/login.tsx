@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useContext, useEffect, useState, type ChangeEvent, type SyntheticEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -31,7 +32,7 @@ function Login() {
 
     try {
       await handleLogin(usuarioLogin);
-         ToastAlerta("login realizado");
+         ToastAlerta("login realizado",'sucess');
     } catch (error) {
       ToastAlerta("Dados do usuário inconsistentes", "erro");
     } finally {
