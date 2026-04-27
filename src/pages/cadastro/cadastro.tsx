@@ -6,7 +6,7 @@ import { cadastrarUsuario } from "../../Service/service"
 import { ClipLoader } from "react-spinners";
 function Cadastro() {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const navigate =useNavigate()
+  const navigate =useNavigate()
 
 
 const[isloading,setIsloading] = useState<boolean>(false)
@@ -48,7 +48,7 @@ async function cadastrarUsuarioNovo(e:SyntheticEvent<HTMLFormElement>){
              // funçao que cadastra usuario no form com "onsubmit"
 e.preventDefault()
 console.log("DADOS QUE ESTOU ENVIANDO:", usuario);
-   if(usuario.senha === confirmarSenha && usuario.senha.length >= 8){
+   if(usuario.senha === confirmarSenha && usuario.senha.length >= 8){ 
 
     setIsloading(true)   //carrega imagem
 
@@ -65,7 +65,7 @@ alert('usuario cadastrado com sucesso')
     setConfirmarSenha("")
    }
 
-   setIsloading(false)   // a imagem em isloading se apaga
+    // a imagem em isloading se apaga
    console.log(confirmarSenha)
    console.log(usuario.senha)
 }

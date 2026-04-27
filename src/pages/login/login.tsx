@@ -33,6 +33,7 @@ function Login() {
     try {
       await handleLogin(usuarioLogin);
          ToastAlerta("login realizado",'sucess');
+         
     } catch (error) {
       ToastAlerta("Dados do usuário inconsistentes", "erro");
     } finally {

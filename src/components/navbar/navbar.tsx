@@ -34,13 +34,13 @@ function Navbar() {
 
 					<div className="flex gap-4">
 						<Link
-							to="/postagens"
+							to="/postagem"
 							className="hover:underline"
 						>
 							Postagens
 						</Link>
 						<Link
-							to="/temas"
+							to="/tema"
 							className="hover:underline"
 						>
 							Temas

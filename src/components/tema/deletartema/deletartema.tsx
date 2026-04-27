@@ -49,7 +49,7 @@ function DeletarTema() {
         setIsLoading(true)
 
         try {
-            await deletar(`/temas/${id}`, {
+            await deletar(`/temas/deletar/${id}`, {
                 headers: {
                     'Authorization': token
                 }
@@ -62,6 +62,7 @@ function DeletarTema() {
                 handleLogout()
             } else {
                 ToastAlerta('Erro ao deletar o tema.', 'erro')
+                console.log(error)
             }
         }
 
@@ -70,7 +71,7 @@ function DeletarTema() {
     }
 
     function retornar() {
-        navigate("/temas")
+        navigate("/tema")
     }
 
     return (

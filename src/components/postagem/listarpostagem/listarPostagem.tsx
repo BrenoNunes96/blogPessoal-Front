@@ -50,7 +50,7 @@ listagemdePostagem()
 
   return (
     <div>
-<h1>ola</h1>
+
  <div>{Postagem.map((x)=>(<Cardpostagem key={x.id} postagem={x}/>))}</div>
       
     </div>
