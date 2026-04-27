@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api =axios.create({baseURL:"https://blog-pessoal-ezv2.onrender.com"})
+const api =axios.create({baseURL:"https://blog-pessoal-2-0ra1.onrender.com"})
 
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
