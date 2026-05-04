@@ -45,14 +45,15 @@ function ListaTemas() {
     }
 
     return (
-        <>
-            {isLoading && (
-                <div className='flex justify-center w-full my-8'>
+    <div className="bg-indigo-900">
+
+   {isLoading && (
+                <div className= '  bg-indigo-900 flex justify-center w-full my-8'>
                     <SyncLoader color="#312e81" size={32} />
                 </div>
             )}
             
-            <div className="flex justify-center w-full my-4">
+            <div className="flex bg justify-center w-full my-4">
                 <div className="container flex flex-col">
 
                     {(!isLoading && temas.length === 0) && (
@@ -69,7 +70,11 @@ function ListaTemas() {
                     
                 </div>
             </div>
-        </>
+
+
+    </div>
+         
+        
     )
 }
 

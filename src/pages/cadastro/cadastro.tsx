@@ -53,7 +53,7 @@ console.log("DADOS QUE ESTOU ENVIANDO:", usuario);
     setIsloading(true)   //carrega imagem
 
   try{
-await cadastrarUsuario('usuarios/cadastrar',usuario,setUsuario) // chama a funçao que esta em service, ela seta url e usuario com todos os inputs para o back na rota
+await cadastrarUsuario('/usuarios/cadastrar',usuario,setUsuario) // chama a funçao que esta em service, ela seta url e usuario com todos os inputs para o back na rota
 alert('usuario cadastrado com sucesso')
 
   }catch(error){

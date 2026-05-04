@@ -18,6 +18,7 @@ export const login  = async(url:string,dados:object,setDados:Function)=>{// setd
 const repostaLogin = await api.post(url,dados)                                 // CREATE
 setDados(repostaLogin.data)
 
+
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type

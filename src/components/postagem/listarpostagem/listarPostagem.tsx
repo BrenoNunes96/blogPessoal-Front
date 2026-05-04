@@ -6,9 +6,11 @@ import type Postagem from '../../../models/postagem'
 import Cardpostagem from '../cardPostagem/cardpostagem'
 import { ToastAlerta } from '../../../util/ToastAlert'
 
-export default function ListarPostagem() {
 
+
+export default function ListarPostagem() {
     const[Postagem,setPostagens] = useState<Postagem[]>([])
+
     const { usuario,handleLogout} = useContext(AuthContext)
 
 
@@ -47,12 +49,14 @@ listagemdePostagem()
 
 
 
-
   return (
     <div>
 
- <div>{Postagem.map((x)=>(<Cardpostagem key={x.id} postagem={x}/>))}</div>
+ <div className= 'bg-blue-950 flex flex-col gap-12'>{Postagem.map((x)=>(<Cardpostagem  key={x.id} postagem={x}/>))}</div>
+ 
       
     </div>
   )
+  
 }
+

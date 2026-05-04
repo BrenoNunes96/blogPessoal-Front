@@ -40,6 +40,8 @@ export function AuthProvider({ children }: AuthProviderProps){
     setIsLoading(true);
 
     try{
+       
+    
         await login('/usuarios/logar', usuarioLogin, setUsuario);    //devolve em SETUSUARIO envia usuariologin q veio de login a const 
         ToastAlerta('Usuário autenticado com sucesso!','sucesso');
            isLogout.current=false
@@ -65,6 +67,7 @@ export function AuthProvider({ children }: AuthProviderProps){
       foto: "",
       token: ""
     })
+
   }
 
   return(

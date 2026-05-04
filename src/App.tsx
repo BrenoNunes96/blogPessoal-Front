@@ -15,6 +15,9 @@ import ListarPostagem from './components/postagem/listarpostagem/listarPostagem'
 
 import { ToastContainer } from 'react-toastify'
 import Perfil from './pages/perfil/perfil'
+import Listarhome from './components/postagem/listarpostagem/listarHome/listarhome'
+import Deletarpostagem from './components/postagem/deletarPostagem/deletarpostagem'
+import AtualizarPerfil from './pages/perfil/atualiazarPerfil'
 function App() {
 
 
@@ -36,9 +39,10 @@ function App() {
       <Route path='/cadastrarpostagem' element={<FormPostagem/>} />
       <Route path='/postagem' element={<ListarPostagem/>}/>
         <Route path="/editarPostagem/:id" element={<FormPostagem/>} />
-      <Route path="/deletarPostagem/:id"   />
+      <Route path="/deletarPostagem/:id" element={<Deletarpostagem/>}  />
             <Route path="/perfil" element={<Perfil/>}  />
-     
+            <Route path='/listarhome' element={<Listarhome/>}/>
+     <Route  path='atualizarusuario'  element={<AtualizarPerfil/>} />
 
     </Routes>
     </div>

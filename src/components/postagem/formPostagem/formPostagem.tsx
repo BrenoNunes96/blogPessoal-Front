@@ -100,7 +100,7 @@ headers:{
 }
 })
 
-
+navigate("/home")
  ToastAlerta("cadatrado com sucesso","sucesso")
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -223,25 +223,7 @@ setPostagem({
 						))}
 					</select>
 				</div>
-				<button
-					type="submit"
-					className="rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800
-                               text-white font-bold w-1/2 mx-auto py-2 flex justify-center"
-					disabled={carregandoTema}
-				>
-					{isloading ? (
-						<ClipLoader
-							color="#ffffff"
-							size={24}
-						/>
-					) : (
-						<span>
-							{id === undefined
-								? 'Cadastrar'
-								: 'Atualizar'}
-						</span>
-					)}
-				</button>
+			
         {/* Botão de Ação */}
         <button
             type="submit"

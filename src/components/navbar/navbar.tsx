@@ -57,6 +57,7 @@ function Navbar() {
 						>
 							Perfil
 						</Link>
+			
 						<Link
 							to=""
 							onClick={logout}

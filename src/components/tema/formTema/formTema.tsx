@@ -25,7 +25,7 @@ function FormTema() {
   async function buscarporId(id: string) {
     try {
       await buscar(`/temas/${id}`, setTema, {
-        headers: { // Corrigido de 'Headers' para 'headers'
+        headers: { 
           Authorization: usuario.token
         }
       })
@@ -50,7 +50,7 @@ function FormTema() {
   }, [id])
 
   function retornar() {
-    navigate("/temas") // Ajustado para plural acompanhando o padrão do DeletarTema
+    navigate("/tema")
   }
 
   async function gerarNovoTema(e: SyntheticEvent<HTMLFormElement>) {
@@ -60,14 +60,14 @@ function FormTema() {
     if (id !== undefined) {
       try {
         await atualizar("/temas/atualizar", tema, setTema, {
-          headers: { // Corrigido de 'Headers' para 'headers'
+          headers: { 
             Authorization: usuario.token
           }
         })
         ToastAlerta("Tema atualizado com sucesso", "sucesso")
         retornar()
       } catch (error: any) {
-        if (error.toString().includes('401')) { // Corrigido de 'tostring()' para 'toString()'
+        if (error.toString().includes('401')) { 
           handleLogout()
         } else {
           ToastAlerta("Erro ao atualizar o tema", "erro")
@@ -81,7 +81,7 @@ function FormTema() {
         ToastAlerta("O tema foi cadastrado com sucesso", "sucesso")
         retornar()
       } catch (error: any) {
-        if (error.toString().includes("401")) { // Corrigido de 'tostring()' para 'toString()'
+        if (error.toString().includes("401")) { 
           handleLogout()
         } else {
           ToastAlerta("Erro ao cadastrar tema", "erro")
@@ -89,36 +89,64 @@ function FormTema() {
       }
     }
     
-    setIsloading(false) // Garante que o loading para de girar independente de sucesso ou erro
+    setIsloading(false) 
   }
 
   return (
-    <div className="container flex flex-col items-center justify-center mx-auto">
-      <h1 className="text-4xl text-center my-8">
-        {id === undefined ? 'Cadastrar Tema' : 'Editar Tema'}
-      </h1>
+    // Wrapper principal para centralizar o card na tela
+    <div className="  bg-indigo-900 flex flex-col items-center justify-center min-h-[80vh] px-4">
+      
+      {/* Card do Formulário */}
+      <div className="w-full max-w-lg bg-white shadow-lg rounded-2xl p-8 border border-slate-100">
+        
+        <h1 className="text-3xl font-bold text-center text-slate-800 mb-8">
+          {id === undefined ? 'Cadastrar Novo Tema' : 'Editar Tema'}
+        </h1>
 
-      <form onSubmit={gerarNovoTema} className="w-1/2 flex flex-col gap-4" >
-        <div className="flex flex-col gap-2">
-          <label htmlFor="descricao">Descrição do Tema</label>
+        <form onSubmit={gerarNovoTema} className="flex flex-col gap-6" >
+          
+          <div className="flex flex-col gap-2">
+            <label htmlFor="descricao" className="text-sm font-semibold text-slate-700">
+              Descrição do Tema
+            </label>
+            <input
+              type="text"
+              placeholder="Descreva aqui seu tema"
+              name='descricao'
+              value={tema.descricao || ''}
+              // Estilização do input com anel de foco (focus ring) combinando com o botão
+              className="w-full px-4 py-3 border border-slate-300 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+            />
+          </div>
 
-          <input
-            type="text"
-            placeholder="Descreva aqui seu tema"
-            name='descricao'
-            value={tema.descricao || ''} // || '' evita erro de uncontrolled input do React
-            className="border-2 border-slate-700 rounded p-2"
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-          />
-        </div>
-        <button
-          className="rounded text-slate-100 bg-indigo-400 hover:bg-indigo-800 w-1/2 py-2 mx-auto flex justify-center"
-          type="submit"
-          disabled={isloading} // Desabilita o clique enquanto carrega
-        >
-          {isloading ? <ClipLoader color="#ffffff" size={24} /> : <span>{id === undefined ? 'Cadastrar' : 'Atualizar'}</span>}
-        </button>
-      </form>
+          {/* Container dos botões */}
+          <div className="flex gap-4 mt-4">
+            {/* Botão de Cancelar usando o padrão red */}
+            <button
+              type="button"
+              onClick={retornar}
+              className="w-1/2 py-3 px-4 rounded-lg text-white font-medium bg-red-500 hover:bg-red-700 active:bg-red-800 transition-colors flex justify-center items-center"
+            >
+              Cancelar
+            </button>
+            
+            {/* Botão de Submit usando o padrão indigo solicitado */}
+            <button
+              type="submit"
+              disabled={isloading}
+              className="w-1/2 py-3 px-4 rounded-lg text-white font-medium bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 disabled:bg-indigo-400 disabled:cursor-not-allowed transition-colors flex justify-center items-center"
+            >
+              {isloading ? (
+                <ClipLoader color="#ffffff" size={24} />
+              ) : (
+                <span>{id === undefined ? 'Cadastrar' : 'Atualizar'}</span>
+              )}
+            </button>
+          </div>
+
+        </form>
+      </div>
     </div>
   );
 }
