@@ -6,9 +6,7 @@ interface CardProps {
 }
 
 // Mantive a função caso você vá usar futuramente
-function alertCrct() {
-  return alert("apenas caracteres ate 100")
-}
+
 
 export default function Cardpostagem({ postagem }: CardProps) {
   return (
@@ -24,7 +22,7 @@ export default function Cardpostagem({ postagem }: CardProps) {
 
       {/* Conteúdo Principal */}
       {/* Removido o 'w-1' que quebrava o card e adicionado 'flex-grow' para preencher o espaço */}
-      <div className='p-6 flex flex-col gap-4 bg-slate-50 flex-grow'>
+      <div className='p-6 flex flex-col gap-4 bg-slate-50 '>
         
         {/* Informações do Usuário (Avatar e Data) */}
         <div className='flex items-center gap-3'>
@@ -44,11 +42,11 @@ export default function Cardpostagem({ postagem }: CardProps) {
         <hr className='border-slate-200' />
 
         {/* Textos da Postagem */}
-        <div className='flex flex-col flex-grow gap-2'>
-          <h2 className='text-xl font-bold text-indigo-900 break-words'>
+        <div className='flex flex-col  gap-2'>
+          <h2 className='text-xl font-bold text-indigo-900 '>
             {postagem.titulo}
           </h2>
-          <p className='text-slate-700 leading-relaxed italic break-words'>
+          <p className='text-slate-700 leading-relaxed italic '>
             {postagem.texto}
           </p>
         </div>

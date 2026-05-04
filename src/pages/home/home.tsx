@@ -1,15 +1,11 @@
 import { Link } from "react-router-dom";
 import Listarhome from "../../components/postagem/listarpostagem/listarHome/listarhome";
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
 
 function Home() {
-  const { handleLogout } = useContext(AuthContext);
+
   
   // Mantive a função apagar caso você tenha planos de usá-la
-  async function apagar(){
-    handleLogout();
-  }
+
 
   return (
     // Container principal ocupando toda a tela com fundo claro para o conteúdo abaixo

@@ -96,9 +96,9 @@ function Login() {
 
           {/* Divisor Estilizado */}
           <div className="flex items-center my-4">
-            <div className="flex-grow border-t border-slate-200"></div>
+            <div className=" border-t border-slate-200"></div>
             <span className="mx-4 text-slate-400 text-sm font-medium">Ou</span>
-            <div className="flex-grow border-t border-slate-200"></div>
+            <div className=" border-t border-slate-200"></div>
           </div>
 
           <p className="text-center text-slate-600 font-medium">

@@ -149,7 +149,7 @@ setPostagem({
   // puxa data do dia
 
 
-	const carregandoTema = tema.descricao === ''
+	
 
   return (
   <div className="container flex flex-col items-center justify-center mx-auto mb-8">

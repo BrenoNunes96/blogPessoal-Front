@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import type Postagem from '../../../../models/postagem'
 import { buscar } from '../../../../Service/service'
 import { AuthContext } from '../../../../contexts/AuthContext'
